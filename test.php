@@ -2,8 +2,11 @@
 
 session_start();
 
-if (isset($_SESSION['is_authorized']) && $_SESSION['is_authorized'] === true){
-    echo 'Вы внутнри';
- } else {
-    echo 'Ошибка';
-    }
+require 'Auth.php';
+
+
+$check = new UserAuth();
+$check->AuthCheck();
+
+var_dump($_POST);
+

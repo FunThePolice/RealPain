@@ -10,10 +10,7 @@
 </form>
 
 <?php 
-
 session_start();
-require 'Auth.php';
-$test = new UserAuth();
-$test->UserValidate($_POST['name'],$_POST['password'],$_POST['email']);
-
-
+require_once 'Database.php';
+$test = new Database();
+$test->addUser($_POST['name'],$_POST['password'],$_POST['email']);

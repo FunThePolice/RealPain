@@ -1,7 +1,7 @@
 
 <?php 
 session_start();
-require 'User.php';
+require 'Auth.php';
 $test = new UserAuth();
 $test->UserLogOut();
 echo 'You are logged out';

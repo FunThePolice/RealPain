@@ -1,0 +1,10 @@
+sudo mysqld_safe --skip-grant-tables & mysql -u root -h 127.0.0.1 -P 33006
+$stmt = $this->db->prepare("INSERT INTO users (,name,password,email) VALUES (?,?,?)");
+        $stmt->bind_param("sss", $name, $password, $email);
+        $stmt->execute();
+        $stmt->close();
+
+        if ($password === '9999'){
+            $_SESSION['is_authorized'] = true;
+            $_SESSION['name'] = $name;
+            $_SESSION['email'] = $email;
