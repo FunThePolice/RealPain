@@ -23,16 +23,29 @@ class UserAuth extends Auth  {
     public function UserValidate($name,$password,$email)
     {
         $data = new Database();
-        if (!empty($data->getUser($name,$password,$email))) {
+        $user = $data->getUser($name,$password,$email);
+        if (!empty($user)) {
             $_SESSION['is_authorized'] = true;
             $_SESSION['name'] = $name;
             $_SESSION['email'] = $email;
+            $id = $user['id'];
+            $_SESSION['id'] = $id;
             echo "Вы авторизованы";
         } else {
             echo "Неверные данные";
         }
     }
     
+    public function UserUpdate($name,$password,$email,$id)
+    {
+        $data = new Database();
+        if ($data->updateUser($name,$password,$email,$id)){
+            $_SESSION['is_authorized'] = true;
+            $_SESSION['name'] = $name;
+            $_SESSION['email'] = $email;
+            $_SESSION['id'] = $id;
+        }
+    }
 
     public function UserLogOut()
     {

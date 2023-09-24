@@ -30,8 +30,25 @@ class Database {
         $stmt->bind_param("sss", $name , $password , $email);
         $stmt->execute();
         $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        return $row;
+        $user = $result->fetch_assoc();
+        return $user;
+    }
+
+    public function getUserById($id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        return $user;
+    }
+
+    public function updateUser($name,$password,$email,$id)
+    {
+        $stmt= $this->db->prepare("UPDATE users SET name = ?,password = ?,email = ? WHERE id = ?");
+        $stmt->bind_param("sssi", $name, $password, $email, $id);
+        $stmt->execute();
     }
 
     public function addUser($name,$password,$email)
